@@ -1,0 +1,135 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+{% set columns = ["Page", "Login", "Mot de passe", "Action"] %}
+<div class="col-md-12">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-download"></i> Liste des comptes sociaux
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    <a class="btn default" href="javascript:;" data-toggle="dropdown">
+                        Afficher les colonnes <i class="fa fa-angle-down"></i>
+                    </a>
+                    <div class="column_toggler dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+                    {% set counter = 0 %}
+                    {% for label in columns %}
+                        <label><input type="checkbox" checked data-column="{{ counter }}">{{ label }}</label>
+                        {% set counter = counter + 1 %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a id="sample_editable_1_new" href="{{ path('socialacc_new') }}" class="btn green"> Créer un nouveau <i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover table-bordered" id="socialacc_table">
+                            <thead>
+                                <tr>
+                                {% for label in columns %}
+                                    <th>{{ label }}</th>
+                                {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for entity in entities %}
+                                <tr>
+                                    <td><a href="{{ path('socialacc_show', { 'id': entity.id }) }}">{{ entity.link }}</a></td>
+                                    <td>{{ entity.login }}</td>
+                                    <td>{{ entity.passwd }}</td>
+                                    <td>
+                                        <a href="{{ path('socialacc_show', { 'id': entity.id }) }}" class="btn btn-xs default"><i class="fa fa-search"></i> View</a>
+                                        <a href="{{ path('socialacc_edit', { 'id': entity.id }) }}" class="btn default btn-xs purple"><i class="fa fa-edit"></i> Edit </a>
+                                        <a href="{{ path('socialacc_delete', { 'id': entity.id }) }}" class="btn default btn-xs black"><i class="fa fa-trash-o"></i> Delete </a>
+                                        <a href="{{ path('website_show', { 'id': entity.idWebsite }) }}" class="btn btn-xs default"><i class="fa fa-globe"></i> Site web</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endblock %}
+
+            {% block javascripts %}
+            {{ parent() }}
+            <script type="text/javascript" src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+            <script>
+
+                var table = $('#socialacc_table');
+
+                var oTable = table.dataTable({
+
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                processing:     "Traitement en cours...",
+                search:         "Rechercher&nbsp;:",
+                lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                infoPostFix:    "",
+                loadingRecords: "Chargement en cours...",
+                zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                emptyTable:     "Aucune donnée disponible dans le tableau",
+                paginate: {
+                    first:      "Premier",
+                    previous:   "Pr&eacute;c&eacute;dent",
+                    next:       "Suivant",
+                    last:       "Dernier"
+                },
+                aria: {
+                    sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                    sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                }
+            },
+/*            "order": [
+            [0, 'asc']
+            ],*/
+            "lengthMenu": [
+            [5, 15, 20, -1],
+                [5, 15, 20, "Tous"] // change per page values here
+                ],
+            // set the initial value
+            "pageLength": -1,
+        });
+
+/*        oTable.fnSetColumnVis(3, false);
+        oTable.fnSetColumnVis(4, false);
+        oTable.fnSetColumnVis(5, false);*/
+
+        //var tableWrapper = $('#websites_table'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
+        var tableColumnToggler = $('.column_toggler');
+
+        /* handle show/hide columns*/
+        $('input[type="checkbox"]', tableColumnToggler).change(function () {
+            /* Get the DataTables object again - this is not a recreation, just a get of the object */
+            var iCol = parseInt($(this).attr("data-column"));
+            var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+            oTable.fnSetColumnVis(iCol, (bVis ? false : true));
+        });
+
+    </script>
+    {% endblock%}

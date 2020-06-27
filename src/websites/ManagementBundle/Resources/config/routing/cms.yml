@@ -1,0 +1,30 @@
+cms:
+    path:     /
+    defaults: { _controller: "websitesManagementBundle:Cms:index" }
+
+cms_show:
+    path:     /{id}/show
+    defaults: { _controller: "websitesManagementBundle:Cms:show" }
+
+cms_new:
+    path:     /new/{idWebsite}
+    defaults: { _controller: "websitesManagementBundle:Cms:new", "idWebsite" : 0 }
+
+cms_create:
+    path:     /create
+    defaults: { _controller: "websitesManagementBundle:Cms:create" }
+    methods:  POST
+
+cms_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "websitesManagementBundle:Cms:edit" }
+
+cms_update:
+    path:     /{id}/update
+    defaults: { _controller: "websitesManagementBundle:Cms:update" }
+    methods:  [POST, PUT]
+
+cms_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "websitesManagementBundle:Cms:delete" }
+    methods:  [GET]

@@ -1,0 +1,88 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}
+<h3 class="page-title">
+    {{ entity.link }} <small>details</small> <a href="{{ path('socialacc_edit', {'id' : entity.id}) }}" class="btn btn-circle red">Modifier <i class="fa fa-pencil"></i></a>
+</h3>
+{% endblock %}
+{% block page_bar %}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="{{ path('website') }}">Sites web</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="{{ path('website_show', { 'id': website.id }) }}">{{ website.domain }}</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>{{ entity.link }}</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="{{ path('socialacc_edit', { 'id': entity.id }) }}">Modifier</a>
+                </li>
+                <li>
+                    <a href="{{ path('socialacc_delete', { 'id': entity.id }) }}">Supprimer</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="{{ path('socialacc') }}">Liste des comptes FTP</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body -%}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="portlet blue-hoki box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-info"></i>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row static-info">
+                    <div class="col-md-5 name">
+                    Page:
+                    </div>
+                    <div class="col-md-7 value">
+                        {{ entity.link }}
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name">
+                        Login:
+                    </div>
+                    <div class="col-md-7 value">
+                        {{ entity.login }}
+                    </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-5 name">
+                        Mot de passe:
+                    </div>
+                    <div class="col-md-7 value">
+                        {{ entity.passwd }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

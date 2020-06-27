@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /web/
+    RewriteRule ^(.*)$ app.php [QSA,L]
+</IfModule>

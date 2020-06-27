@@ -1,0 +1,203 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<h1>{{ entity.domain }}</h1>
+<div class="row">
+	{{ form_start(edit_form, {'role':'form', 'method': 'POST'}) }}
+<div class="portlet light bordered">
+						<div class="portlet-title">
+							<div class="caption font-red-sunglo">
+								<span class="caption-subject bold uppercase">{{ entity.domain }}</span>
+								{{ form_widget(edit_form.online,{attr:{class:entity.domain ? 'form-control edited switch': 'form-control switch'}}) }}
+							</div>
+							<div class="actions">
+								<a class="btn btn-circle btn-icon-only green" href="{{ path('website') }}">
+								<i class="icon-list"></i>
+								</a>
+								<a class="btn btn-circle btn-icon-only red" href="{{ path('website_delete', {id: entity.id}) }}">
+								<i class="icon-trash"></i>
+								</a>
+								<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title="">
+								</a>
+							</div>
+						</div>
+						{{ form_errors(edit_form) }}
+						<div class="portlet-body form">
+								<div class="form-body">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input has-success form-md-floating-label">
+												<div class="input-icon">
+													{{ form_widget(edit_form.domain,{attr:{class:entity.domain ? 'form-control edited': 'form-control'}}) }}
+													{{ form_label(edit_form.domain) }}
+													<!-- <span class="help-block">Some help goes here...</span> -->
+													<i class="fa fa-globe"></i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.ip,{attr:{class:entity.ip ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.ip) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.owner,{attr:{class:entity.owner ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.owner) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input has-success form-md-floating-label">
+												<div class="input-icon">
+													{{ form_widget(edit_form.cpanel,{attr:{class:entity.cpanel ? 'form-control edited': 'form-control'}}) }}
+													{{ form_label(edit_form.cpanel) }}
+													<!-- <span class="help-block">Some help goes here...</span> -->
+													<i class="fa fa-globe"></i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.cplogin,{attr:{class:entity.cplogin ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.cplogin) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.cppass,{attr:{class:entity.cppass ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.cppass) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input has-success form-md-floating-label">
+												<div class="input-icon">
+													{{ form_widget(edit_form.webmail,{attr:{class:entity.webmail ? 'form-control edited': 'form-control'}}) }}
+													{{ form_label(edit_form.webmail) }}
+													<!-- <span class="help-block">Some help goes here...</span> -->
+													<i class="fa fa-globe"></i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.pop3,{attr:{class:entity.pop3 ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.pop3) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.smtp,{attr:{class:entity.smtp ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.smtp) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group form-md-line-input has-success form-md-floating-label">
+												<div class="input-icon">
+													{{ form_widget(edit_form.dns1,{attr:{class:entity.dns1 ? 'form-control edited': 'form-control'}}) }}
+													{{ form_label(edit_form.dns1) }}
+													<!-- <span class="help-block">Some help goes here...</span> -->
+													<i class="fa fa-globe"></i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.dns2,{attr:{class:entity.dns2 ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.dns2) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input has-success form-md-floating-label">
+												<div class="input-icon">
+													{{ form_widget(edit_form.billing,{attr:{class:entity.billing ? 'form-control edited': 'form-control'}}) }}
+													{{ form_label(edit_form.billing) }}
+													<!-- <span class="help-block">Some help goes here...</span> -->
+													<i class="fa fa-globe"></i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.billinglogin,{attr:{class:entity.billinglogin ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.billinglogin) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group form-md-line-input form-md-floating-label">
+												{{ form_widget(edit_form.billingpass,{attr:{class:entity.billingpass ? 'form-control edited': 'form-control'}}) }}
+												{{ form_label(edit_form.billingpass) }}
+												<!-- <span class="help-block">Some help goes here...</span> -->
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										{{ form_label(edit_form.notes) }}
+										{{ form_widget(edit_form.notes,{attr:{rows:'6', class:'wysihtml5 form-control'}}) }}
+									</div>
+
+								</div>
+								<div class="form-actions noborder">
+									{{ form_row(edit_form.submit, { 'label': 'Mettre à jour', attr:{'class': 'btn blue'} }) }}
+								</div>
+						</div>
+					</div>
+					{{ form_end(edit_form) }}
+				</div>
+    
+
+{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-switch/bootstrap-switch.css') }}"/>
+<style>
+	div.checker {
+		width: auto !important;
+		height: auto !important;
+	}
+</style>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.js') }}"></script>
+<script>
+	jQuery(document).ready(function(){
+		if (!jQuery().wysihtml5) {
+			return;
+		}
+
+		if ($('.wysihtml5').size() > 0) {
+			$('.wysihtml5').wysihtml5({
+				"stylesheets": ["{{ asset('plugins/bootstrap-wysihtml5/wysiwyg-color.css') }}"]
+			});
+		}
+
+		$("[type=checkbox].switch").bootstrapSwitch({
+			size: 'mini',
+			handleWidth: 23,
+			onColor: 'success',
+			offColor: 'danger',
+		});
+
+	});
+</script>
+{% endblock %}

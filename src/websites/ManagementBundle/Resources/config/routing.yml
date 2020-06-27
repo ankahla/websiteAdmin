@@ -1,0 +1,28 @@
+websites_management_cms:
+    resource: "@websitesManagementBundle/Resources/config/routing/cms.yml"
+    prefix:   /cms
+
+websites_management_homepage:
+    path:     /
+    defaults: { _controller: websitesManagementBundle:Website:index }
+
+websites_management_websites:
+    resource: "@websitesManagementBundle/Resources/config/routing/websites.yml"
+    prefix:   /websites
+websites_management_ftpaccounts:
+    resource: "@websitesManagementBundle/Resources/config/routing/ftpaccounts.yml"
+    prefix:   /ftpaccounts
+websites_management_databases:
+    resource: "@websitesManagementBundle/Resources/config/routing/databases.yml"
+    prefix:   /databases
+websites_management_emailacc:
+    resource: "@websitesManagementBundle/Resources/config/routing/emailacc.yml"
+    prefix:   /emailacc
+websites_management_socialacc:
+    resource: "@websitesManagementBundle/Resources/config/routing/socialacc.yml"
+    prefix:   /socialacc
+
+websites_management_search:
+    path:     /search
+    defaults: { _controller: "websitesManagementBundle:Search:index"}
+    methods: [POST]

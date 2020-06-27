@@ -1,0 +1,22 @@
+<li class="dropdown dropdown-fw {% if route in app.request.attributes.get('_route') %}open selected {% endif %}">
+	<a href="{{ path(route) }}">
+	{{ label }}
+	</a>
+	<ul class="dropdown-menu dropdown-menu-fw">
+		<li class="active"><a href="{{ path(route) }}">List</a></li>
+		<li><a href="{{ path(route ~ '_new') }}">Créer</a></li>
+		<li class="dropdown more-dropdown-sub">
+			<a href="javascript:;" data-close-others="true">
+				Nouveau
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="{{ path('website_new') }}">Site</a></li>
+				<li><a href="{{ path('ftpaccounts_new') }}">Compte FTP</a></li>
+				<li><a href="{{ path('databases_new') }}">Base de donnnée</a></li>
+				<li><a href="{{ path('emailacc_new') }}">Compte Email</a></li>
+				<li><a href="{{ path('cms_new') }}">Cms</a></li>
+				<li><a href="{{ path('socialacc_new') }}">Compte social</a></li>
+			</ul>
+		</li>
+	</ul>
+</li>

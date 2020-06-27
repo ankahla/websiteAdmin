@@ -1,0 +1,30 @@
+emailacc:
+    path:     /
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:index" }
+
+emailacc_show:
+    path:     /{id}/show
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:show" }
+
+emailacc_new:
+    path:     /new/{idWebsite}
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:new", "idWebsite":0 }
+
+emailacc_create:
+    path:     /create
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:create" }
+    methods:  POST
+
+emailacc_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:edit" }
+
+emailacc_update:
+    path:     /{id}/update
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:update" }
+    methods:  [POST, PUT]
+
+emailacc_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "websitesManagementBundle:EmailAcc:delete" }
+    methods:  [GET]

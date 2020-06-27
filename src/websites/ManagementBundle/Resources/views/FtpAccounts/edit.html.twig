@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>FtpAccounts edit</h1>
+
+    {{ form_start(edit_form, {attr:{'class':'form-horizontal', 'role':'form'}}) }}
+
+    <div class="portlet box purple ">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-download"></i> Modifier {{ entity.login }}
+							</div>
+							<div class="tools">
+								<a href="" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="" class="reload">
+								</a>
+								<a href="" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+								<div class="form-body">
+									<div class="form-group">
+									    {{ form_label(edit_form.idWebsite, edit_form.idWebsite.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											<select name="{{ edit_form.vars.name }}[{{ edit_form.idWebsite.vars.name }}]" class="form-control">
+											{% for w in websitesList %}
+											<option value="{{ w.id }}" {% if (w.id == entity.idWebsite) %}selected{% endif %}>{{ w.domain }}</option>
+											{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+									    {{ form_label(edit_form.host, edit_form.host.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											{{ form_widget(edit_form.host, {attr: {class:'form-control'}}) }}
+										</div>
+									</div>
+									<div class="form-group">
+									    {{ form_label(edit_form.login, edit_form.login.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											{{ form_widget(edit_form.login, {attr: {class:'form-control'}}) }}
+										</div>
+									</div>
+									<div class="form-group">
+									    {{ form_label(edit_form.passwd, edit_form.passwd.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											{{ form_widget(edit_form.passwd, {attr: {class:'form-control'}}) }}
+										</div>
+									</div>
+									
+								</div>
+								<div class="form-actions right1">
+									<input type="submit" value="Modifier" class="btn blue" />
+									<a href="{{ path('ftpaccounts_show', {id: entity.id}) }}" class="btn default">Annuler</a>
+								</div>
+						</div>
+					</div>
+{{ form_widget(edit_form._token) }}
+{{ form_end(edit_form, {'render_rest': false}) }}
+
+{% endblock %}

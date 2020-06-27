@@ -1,0 +1,34 @@
+
+{{ form_start(form) }}
+		<div class="form-title">
+			<span class="form-title">Créer un compte</span>
+		</div>
+		<p class="hint">
+			 Entrez vos details ci-dessous:
+		</p>
+		<div class="form-group {% if not form.vars.valid %} has-error {% endif %}">
+			{{ form_label(form.username,form.username.vars.label, {label_attr:{class:'control-label visible-ie8 visible-ie9'}}) }}
+			{{ form_widget(form.username, {attr:{class:'form-control placeholder-no-fix', placeholder:form.username.vars.label}}) }}
+			<span class="help-block">{{ form.username.vars.errors }}</span>
+		</div>
+		<div class="form-group {% if not form.vars.valid %} has-error {% endif %}">
+			{{ form_label(form.email,form.email.vars.label, {label_attr:{class:'control-label visible-ie8 visible-ie9'}}) }}
+			{{ form_widget(form.email, {attr:{class:'form-control placeholder-no-fix', placeholder:form.email.vars.label}}) }}
+			<span class="help-block">{{ form.email.vars.errors }}</span>
+		</div>
+		<div class="form-group {% if not form.vars.valid %} has-error {% endif %}">
+		{{ form_label(form.plainPassword.first,form.plainPassword.first.vars.label, {label_attr:{class:'control-label visible-ie8 visible-ie9'}}) }}
+		{{ form_widget(form.plainPassword.first, {attr:{class:'form-control placeholder-no-fix', placeholder:form.plainPassword.first.vars.label}}) }}
+		<span class="help-block">{{ form.plainPassword.first.vars.errors }}</span>
+		</div>
+		<div class="form-group {% if not form.vars.valid %} has-error {% endif %}">
+			{{ form_label(form.plainPassword.second,form.plainPassword.second.vars.label, {label_attr:{class:'control-label visible-ie8 visible-ie9'}}) }}
+			{{ form_widget(form.plainPassword.second, {attr:{class:'form-control placeholder-no-fix', placeholder:form.plainPassword.second.vars.label}}) }}
+			<span class="help-block">{{ form.plainPassword.second.vars.errors }}</span>
+		</div>
+		<div class="form-actions">
+			<button type="button" id="register-back-btn" class="btn btn-default">Retour</button>
+			<button type="submit" id="register-submit-btn" class="btn btn-primary uppercase pull-right">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+		</div>
+		{{ form_widget(form._token) }}
+	</form>

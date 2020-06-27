@@ -1,0 +1,30 @@
+socialacc:
+    path:     /
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:index" }
+
+socialacc_show:
+    path:     /{id}/show
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:show" }
+
+socialacc_new:
+    path:     /new/{idWebsite}
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:new", "idWebsite":0 }
+
+socialacc_create:
+    path:     /create
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:create" }
+    methods:  POST
+
+socialacc_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:edit" }
+
+socialacc_update:
+    path:     /{id}/update
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:update" }
+    methods:  [POST, PUT]
+
+socialacc_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "websitesManagementBundle:SocialAcc:delete" }
+    methods:  [GET]

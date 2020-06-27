@@ -1,0 +1,11 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets%}
+{{ parent() }}
+<link href="{{ asset('plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/profile.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/tasks.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block fos_user_content %}
+{# include "FOSUserBundle:Profile:show_content.html.twig" #}
+{% endblock fos_user_content %}

@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Nouveau compte FTP</h1>
+{{ form_start(form, {attr:{'class':'form-horizontal', 'role':'form'}}) }}
+
+    <div class="portlet box purple ">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-download"></i> Nouveau compte FTP
+							</div>
+							<div class="tools">
+								<a href="" class="collapse">
+								</a>
+								<a href="#portlet-config" data-toggle="modal" class="config">
+								</a>
+								<a href="" class="reload">
+								</a>
+								<a href="" class="remove">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+								<div class="form-body">
+									<div class="form-group">
+									    {{ form_label(form.host, 'Nom de domaine', {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											<select name="{{ form.vars.name }}[{{ form.idWebsite.vars.name }}]" class="form-control">
+											{% for w in websitesList %}
+											<option value="{{ w.id }}" {% if (w.id == idWebsite) %}selected{% endif %}>{{ w.domain }}</option>
+											{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+									    {{ form_label(form.host, 'Hote', {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											{{ form_widget(form.host, {attr: {class:'form-control'}}) }}
+										</div>
+									</div>
+									<div class="form-group">
+									    {{ form_label(form.login, 'Login', {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											{{ form_widget(form.login, {attr: {class:'form-control'}}) }}
+										</div>
+									</div>
+									<div class="form-group">
+									    {{ form_label(form.passwd, 'Mot de passe', {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="col-md-9">
+											{{ form_widget(form.passwd, {attr: {class:'form-control'}}) }}
+										</div>
+									</div>
+									
+								</div>
+								<div class="form-actions right1">
+									<input type="submit" value="Créer" class="btn blue" />
+									<a href="{% if idWebsite %}{{ path('website_show',{id:idWebsite}) }}{% else %}{{ path('ftpaccounts') }}{% endif %}" class="btn default">Annuler</a>
+								</div>
+						</div>
+					</div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
+
+
+{% endblock %}

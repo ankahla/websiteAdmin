@@ -1,0 +1,30 @@
+databases:
+    path:     /
+    defaults: { _controller: "websitesManagementBundle:dbs:index" }
+
+databases_show:
+    path:     /{id}/show
+    defaults: { _controller: "websitesManagementBundle:dbs:show" }
+
+databases_new:
+    path:     /new/{idWebsite}
+    defaults: { _controller: "websitesManagementBundle:dbs:new", "idWebsite": 0 }
+
+databases_create:
+    path:     /create
+    defaults: { _controller: "websitesManagementBundle:dbs:create" }
+    methods:  POST
+
+databases_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "websitesManagementBundle:dbs:edit" }
+
+databases_update:
+    path:     /{id}/update
+    defaults: { _controller: "websitesManagementBundle:dbs:update" }
+    methods:  [POST, PUT]
+
+databases_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "websitesManagementBundle:dbs:delete" }
+    methods:  [GET]

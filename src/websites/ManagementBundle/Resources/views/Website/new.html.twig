@@ -1,0 +1,158 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+
+
+					<div class="portlet light bordered">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-globe font-red-sunglo"></i> <span class="caption-subject font-red-sunglo bold uppercase">Nouveau site web</span>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							{{ form_start(form, {'role':'form', attr:{'class':'form-horizontal'}, 'method': 'POST'}) }}
+								<div class="form-body">
+
+<h3 class="form-section">Général</h3>
+									<div class="form-group">
+										{{ form_label(form.domain, form.domain.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-globe"></i>
+											{{ form_widget(form.domain, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.ip, form.ip.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-globe"></i>
+											{{ form_widget(form.ip, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+<div class="form-group">
+										{{ form_label(form.owner, form.owner.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-user"></i>
+											{{ form_widget(form.owner, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+
+<h3 class="form-section">Cpanel</h3>
+								<div class="form-group">
+										
+										{{ form_label(form.cpanel, form.cpanel.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-desktop"></i>
+											{{ form_widget(form.cpanel, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.cplogin, form.cplogin.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-user"></i>
+											{{ form_widget(form.cplogin, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.cppass, form.cppass.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-lock"></i>
+											{{ form_widget(form.cppass, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+<h3 class="form-section">Email</h3>
+								<div class="form-group">
+										{{ form_label(form.pop3, form.pop3.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-envelope"></i>
+											{{ form_widget(form.pop3, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.smtp, form.smtp.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-envelope"></i>
+											{{ form_widget(form.smtp, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.webmail, form.webmail.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-envelope"></i>
+											{{ form_widget(form.webmail, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+<h3 class="form-section">DNS</h3>
+								<div class="form-group">
+										{{ form_label(form.dns1, form.dns1.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-globe"></i>
+											{{ form_widget(form.dns1, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.dns2, form.dns2.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-globe"></i>
+											{{ form_widget(form.dns2, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+<h3 class="form-section">Facturation</h3>
+								<div class="form-group">
+										{{ form_label(form.billing, form.billing.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-globe"></i>
+											{{ form_widget(form.billing, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.billinglogin, form.billinglogin.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-user"></i>
+											{{ form_widget(form.billinglogin, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+								<div class="form-group">
+										{{ form_label(form.billingpass, form.billingpass.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+										<div class="input-icon col-md-4">
+											<i class="fa fa-lock"></i>
+											{{ form_widget(form.billingpass, {attr:{'class':'form-control'}}) }}
+										</div>
+									</div>
+<h3 class="form-section">{{ form.notes.vars.label }}</h3>
+
+										{{ form_widget(form.notes,{attr:{rows:'6', class:'wysihtml5 form-control'}}) }}
+									
+								<div class="form-actions">
+									{{ form_widget(form.submit, { 'label': 'Créer', attr:{'class': 'btn blue'} }) }}
+									<a href="{{ path('website') }}" class="btn default">Annuler</a>
+								</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js') }}"></script>
+<script>
+	jQuery(document).ready(function(){
+		if (!jQuery().wysihtml5) {
+			return;
+		}
+
+		if ($('.wysihtml5').size() > 0) {
+			$('.wysihtml5').wysihtml5({
+				"stylesheets": ["{{ asset('plugins/bootstrap-wysihtml5/wysiwyg-color.css') }}"]
+			});
+		}
+
+	});
+</script>
+{% endblock %}

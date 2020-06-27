@@ -1,0 +1,20 @@
+<form class="register-form"  action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" style="display:block">
+<div class="form-title">
+			<span class="form-title">Réinitialiser votre mot de passe</span>
+		</div>
+		<div class="form-group {% if not form.vars.valid %} has-error {% endif %}">
+			{{ form_label(form.new.first, form.new.first.vars.label, {'label_attr': {'class': 'control-label visible-ie8 visible-ie9'}}) }}
+			{{ form_widget(form.new.first, {attr:{'class':'form-control placeholder-no-fix', 'placeholder':form.new.first.vars.label}}) }}
+			<span class="help-block">{{ form.new.first.vars.errors }}</span>
+		</div>
+		<div class="form-group {% if not form.vars.valid %} has-error {% endif %}">
+			{{ form_label(form.new.second, form.new.second.vars.label, {'label_attr': {'class': 'control-label visible-ie8 visible-ie9'}}) }}
+			{{ form_widget(form.new.second, {attr:{'class':'form-control placeholder-no-fix', 'placeholder':form.new.second.vars.label}}) }}
+			<span class="help-block">{{ form.new.second.vars.errors }}</span>
+		</div>
+
+    <div class="form-actions">
+			<button type="submit" id="register-submit-btn" class="btn btn-primary uppercase">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
+	</div>
+	{{ form_widget(form._token) }}
+</form>

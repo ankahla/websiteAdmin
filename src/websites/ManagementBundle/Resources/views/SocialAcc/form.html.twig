@@ -1,0 +1,32 @@
+<div class="form-group">
+	{{ form_label(form.idWebsite, form.idWebsite.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+	<div class="col-md-4">
+		<select name="{{ form.vars.name }}[{{ form.idWebsite.vars.name }}]" class="form-control">
+			{% for w in websitesList %}
+			<option value="{{ w.id }}" {% if (w.id == entity.idWebsite) %}selected{% endif %}>{{ w.domain }}</option>
+			{% endfor %}
+		</select>
+	</div>
+</div>
+
+<div class="form-group">
+	{{ form_label(form.link, form.link.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+	<div class="input-icon col-md-4">
+		<i class="fa fa-globe"></i>
+		{{ form_widget(form.link, {attr:{'class':'form-control'}}) }}
+	</div>
+</div>
+<div class="form-group">
+	{{ form_label(form.login, form.login.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+	<div class="input-icon col-md-4">
+		<i class="fa fa-user"></i>
+		{{ form_widget(form.login, {attr:{'class':'form-control'}}) }}
+	</div>
+</div>
+<div class="form-group">
+	{{ form_label(form.passwd, form.passwd.vars.label, {'label_attr': {'class': 'col-md-3 control-label'}}) }}
+	<div class="input-icon col-md-4">
+		<i class="fa fa-lock"></i>
+		{{ form_widget(form.passwd, {attr:{'class':'form-control'}}) }}
+	</div>
+</div>

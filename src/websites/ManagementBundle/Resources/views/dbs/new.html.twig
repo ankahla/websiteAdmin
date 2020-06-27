@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-red-sunglo"></i> <span class="caption-subject font-red-sunglo bold uppercase">Créer une base de donnée</span>
+		</div>
+	</div>
+
+	<div class="portlet-body form">
+		{{ form_start(form, {'role':'form', attr:{'class':'form-horizontal'}, 'method': 'POST'}) }}
+		<div class="form-body">
+
+			{% include 'websitesManagementBundle:dbs:form.html.twig' with {form:form, websitesList:websitesList} %}
+
+			<div class="form-actions">
+				{{ form_widget(form.submit, { attr:{'class': 'btn blue'} }) }}
+				<a href="{% if idWebsite %}{{ path('website_show',{id:idWebsite}) }}{% else %}{{ path('databases') }}{% endif %}" class="btn default">Annuler</a>
+			</div>
+
+		</div>
+		{{ form_widget(form._token) }}
+		{{ form_end(form, {'render_rest': false}) }}
+	</div>
+</div>
+
+{% endblock %}

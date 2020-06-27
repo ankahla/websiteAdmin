@@ -1,0 +1,60 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+	<!-- BEGIN LOGIN FORM -->
+	<form class="login-form" action="{{ path("fos_user_security_check") }}" method="post">
+	<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+		<div class="form-title">
+			<span class="form-title">Bienvenue.</span>
+			<span class="form-subtitle">Veuillez vous connecter.</span>
+		</div>
+		<div class="alert alert-danger display-hide">
+			<button class="close" data-close="alert"></button>
+			<span>
+			Utiliser votre identifiant ou mot de passe pour se connecter.</span>
+		</div>
+		<div class="form-group">
+			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+			<label class="control-label visible-ie8 visible-ie9">Identifiant / email</label>
+			<input id="username" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" required="required" placeholder="Identifiant" name="_username" value="{{ last_username }}" placeholder="Identifiant / mot de passe"/>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Mot de passe</label>
+			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Mot de passe" name="_password"/>
+		</div>
+		<div class="form-actions">
+			<input type="submit" class="btn btn-primary btn-block uppercase" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+		</div>
+		<div class="form-actions">
+			<div class="pull-left">
+				<label class="rememberme check">
+				<input type="checkbox" name="_remember_me" value="on"/>{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+			</div>
+			<div class="pull-right forget-password-block">
+				<a href="#" id="forget-password" class="forget-password">Mot de passe oublié ?</a>
+			</div>
+		</div>
+<!--		<div class="create-account">
+			<p>
+				<a href="javascript:return false" id="register-btn">Créer un compte</a>
+			</p>
+		</div> -->
+	</form>
+	<!-- END LOGIN FORM -->
+	<!-- BEGIN FORGOT PASSWORD FORM -->
+	<form class="forget-form" action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+		<div class="form-title">
+			<span class="form-title">Mot de passe oublié ?</span>
+			<span class="form-subtitle">Entrez votre email.</span>
+		</div>
+		<div class="form-group">
+			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" required="required" placeholder="Email" name="username"/>
+		</div>
+		<div class="form-actions">
+			<button type="button" id="back-btn" class="btn btn-default">Retour</button>
+			<button type="submit" class="btn btn-primary uppercase pull-right">{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}</button>
+		</div>
+	</form>
+	<!-- END FORGOT PASSWORD FORM -->
+{% endblock fos_user_content %}

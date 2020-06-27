@@ -1,0 +1,30 @@
+ftpaccounts:
+    path:     /
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:index" }
+
+ftpaccounts_show:
+    path:     /{id}/show
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:show" }
+
+ftpaccounts_new:
+    path:     /new/{idWebsite}
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:new",  "idWebsite":0 }
+
+ftpaccounts_create:
+    path:     /create
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:create" }
+    methods:  POST
+
+ftpaccounts_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:edit" }
+
+ftpaccounts_update:
+    path:     /{id}/update
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:update" }
+    methods:  [POST, PUT]
+
+ftpaccounts_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "websitesManagementBundle:FtpAccounts:delete" }
+    methods:  [GET]

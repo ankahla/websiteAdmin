@@ -1,0 +1,677 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}
+<h3 class="page-title">
+  {{ entity.domain }} <small>details</small> <a href="{{ path('website_edit', {'id' : entity.id}) }}" class="btn btn-circle red">Modifier <i class="fa fa-pencil"></i></a>
+</h3>
+{% endblock %}
+{% block page_bar %}
+<div class="page-bar">
+  <ul class="page-breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="{{ path('website') }}">Sites web</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+      <a>{{ entity.domain }}</a>
+    </li>
+  </ul>
+  <div class="page-toolbar">
+
+    <div class="btn-group">
+      <button class="btn btn-circle blue green dropdown-toggle" type="button" data-toggle="dropdown">
+        Actions <i class="fa fa-angle-down"></i>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="{{ path('website_edit', { 'id': entity.id }) }}">Modifier</a>
+        </li>
+        <li>
+          <a href="{{ path('website_delete', { 'id': entity.id }) }}">Supprimer</a>
+        </li>
+        <li class="divider">
+        </li>
+        <li>
+          <a href="{{ path('website') }}">Retour à la liste</a>
+        </li>
+      </ul>
+
+      <div class="btn-group btn-group-circle pull-right">
+        <a href="{{ path('website_new') }}" class="btn green"><i class="fa fa-plus"></i> Nouveau</a>
+        <a href="{{ path('website_new')}}" class="btn btn-circle-right green dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="{{ path('ftpaccounts_new',{'idWebsite':entity.id}) }}">Compte FTP</a>
+          </li>
+          <li>
+            <a href="{{ path('databases_new',{'idWebsite':entity.id}) }}">Base de donnée</a>
+          </li>
+          <li>
+            <a href="{{ path('emailacc_new',{'idWebsite':entity.id}) }}">Compte Email</a>
+          </li>
+          <li>
+            <a href="{{ path('cms_new',{'idWebsite':entity.id}) }}">Cms</a>
+          </li>
+          <li>
+            <a href="{{ path('socialacc_new',{'idWebsite':entity.id}) }}">Compte social</a>
+          </li>
+          <li class="divider">
+          </li>
+          <li>
+            <a href="{{ path('website_new') }}">Site</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+{% block body -%}
+
+<div class="portlet-body">
+  <div class="tabbable">
+    <ul class="nav nav-tabs nav-tabs-lg">
+      <li class="active">
+        <a href="#tab_1" data-toggle="tab"><i class="fa fa-info-circle"></i>
+          Informations Générales </a>
+        </li>
+        <li>
+          <a href="#tab_2" data-toggle="tab"><i class="fa fa-download"></i>
+            FTP {% if ftpAccounts|length > 0 %}<span class="badge badge-success">
+            {{ ftpAccounts|length }} </span>{% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="#tab_3" data-toggle="tab"><i class="fa fa-database"></i>
+            Bases de données {% if dbs|length > 0 %}<span class="badge badge-success">
+            {{ dbs|length }} </span>{% endif %} </a>
+          </li>
+          <li>
+            <a href="#tab_4" data-toggle="tab"><i class="fa fa-envelope"></i>
+              Comptes Emails {% if emails|length > 0 %}<span class="badge badge-success">
+              {{ emails|length }} </span>{% endif %}
+            </a>
+          </li>
+          <li>
+            <a href="#tab_5" data-toggle="tab"><i class="fa fa-wordpress"></i>
+              CMS {% if cmsList|length > 0 %}<span class="badge badge-success">
+              {{ cmsList|length }} </span>{% endif %} </a>
+            </li>
+            <li>
+              <a href="#tab_6" data-toggle="tab"><i class="fa fa-share-alt"></i>
+                Comptes sociaux {% if socialAcc|length > 0 %}<span class="badge badge-success">
+                {{ socialAcc|length }} </span>{% endif %} </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <div class="portlet blue-hoki box">
+                      <div class="portlet-title">
+                        <div class="caption">
+                          <i class="fa fa-info"></i>Général
+                        </div>
+                      </div>
+                      <div class="portlet-body">
+
+                        <div class="row static-info">
+                          <div class="col-md-5 name">
+                           Nom de domaine:
+                         </div>
+                         <div class="col-md-7 value">
+                           {{ entity.domain }}
+                         </div>
+                       </div>
+                       <div class="row static-info">
+                        <div class="col-md-5 name">
+                         Adresse Ip:
+                       </div>
+                       <div class="col-md-7 value">
+                         {{ entity.ip }}
+                       </div>
+                     </div>
+                     <div class="row static-info">
+                      <div class="col-md-5 name">
+                       Date création:
+                     </div>
+                     <div class="col-md-7 value">
+                       {{ entity.createdDate|date('d/m/Y H:i:s') }}
+                     </div>
+                   </div>
+
+                   <div class="row static-info">
+                    <div class="col-md-5 name">
+                     Date dernière modification:
+                   </div>
+                   <div class="col-md-7 value">
+                    {{ entity.updDate|date('d/m/Y H:i:s') }}
+                  </div>
+                </div>
+
+                <div class="row static-info">
+                  <div class="col-md-5 name">
+                   Etat:
+                 </div>
+                 <div class="col-md-7 value">
+                     {%   if (entity.online) %}
+                  <span class="label label-success">
+                    En ligne </span>
+                  </div>
+                    {% else %}
+                    <span class="label label-danger">
+                    Hors ligne </span>
+                </div>
+                    {% endif %}
+                </div>
+                <!--
+                        <div class="row static-info">
+                  <div class="col-md-5 name">
+                   Statut paiement:
+                 </div>
+                 <div class="col-md-7 value">
+                   <span class="label label-danger">
+                    non payé </span>
+                  </div>
+                </div>
+                -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="portlet blue-hoki box">
+              <div class="portlet-title">
+                <div class="caption">
+                  <i class="fa fa-desktop"></i>Accèe CPANEL
+                </div>
+              </div>
+              <div class="portlet-body">
+                <div class="row static-info">
+                  <div class="col-md-5 name">
+                   CPanel:
+                 </div>
+                 <div class="col-md-7 value">
+                   {{ entity.cpanel }}
+                 </div>
+               </div>
+               <div class="row static-info">
+                <div class="col-md-5 name">
+                 Login:
+               </div>
+               <div class="col-md-7 value">
+                 {{ entity.cplogin }}
+               </div>
+             </div>
+             <div class="row static-info">
+              <div class="col-md-5 name">
+               Mot de passe:
+             </div>
+             <div class="col-md-7 value">
+               {{ entity.cppass }}
+             </div>
+           </div>
+           <div class="row static-info">
+            <div class="col-md-5 name">
+             Webmail:
+           </div>
+           <div class="col-md-7 value">
+             {{ entity.webmail }}
+           </div>
+         </div>
+         <div class="row static-info">
+          <div class="col-md-5 name">
+           Pop3:
+         </div>
+         <div class="col-md-7 value">
+           {{ entity.pop3 }}
+         </div>
+       </div>
+       <div class="row static-info">
+        <div class="col-md-5 name">
+         Smtp:
+       </div>
+       <div class="col-md-7 value">
+         {{ entity.smtp }}
+       </div>
+     </div>
+     <div class="row static-info">
+      <div class="col-md-5 name">
+       Dns1:
+     </div>
+     <div class="col-md-7 value">
+       {{ entity.dns1 }}
+     </div>
+   </div>
+   <div class="row static-info">
+    <div class="col-md-5 name">
+     Dns2:
+   </div>
+   <div class="col-md-7 value">
+     {{ entity.dns2 }}
+   </div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+ <div class="col-md-6 col-sm-12">
+  <div class="portlet blue-hoki box">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-user"></i>Information client
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div class="row static-info">
+        <div class="col-md-5 name">
+         Customer Name:
+       </div>
+       <div class="col-md-7 value">
+         {{ entity.owner }}
+       </div>
+     </div>
+<!--     <div class="row static-info">
+      <div class="col-md-5 name">
+       Email:
+     </div>
+     <div class="col-md-7 value">
+       jhon@doe.com
+     </div>
+   </div>
+
+   <div class="row static-info">
+    <div class="col-md-5 name">
+     State:
+   </div>
+   <div class="col-md-7 value">
+     New York
+   </div>
+ </div>
+ <div class="row static-info">
+  <div class="col-md-5 name">
+   Phone Number:
+ </div>
+ <div class="col-md-7 value">
+   12234389
+ </div>
+</div>
+-->
+</div>
+</div>
+</div>
+
+<div class="col-md-6 col-sm-12">
+  <div class="portlet blue-hoki box">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-credit-card"></i>Paiement
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div class="row static-info">
+        <div class="col-md-5 name">
+         Url:
+       </div>
+       <div class="col-md-7 value">
+         {{ entity.billing }}
+       </div>
+     </div>
+     <div class="row static-info">
+      <div class="col-md-5 name">
+       login:
+     </div>
+     <div class="col-md-7 value">
+       {{ entity.Billinglogin }}
+     </div>
+   </div>
+   <div class="row static-info">
+    <div class="col-md-5 name">
+     Mot de passe:
+   </div>
+   <div class="col-md-7 value">
+     {{ entity.Billingpass }}
+   </div>
+ </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    <div class="well">
+      {{ entity.notes|raw }}
+    </div>
+  </div>
+</div>
+</div>
+<div class="tab-pane" id="tab_2">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="portlet grey-cascade box">
+        <div class="portlet-title">
+          <div class="caption">
+            <i class="fa fa-download"></i>Comptes FTP
+          </div>
+          <div class="actions">
+            <a href="{{ path('ftpaccounts_new', {'idWebsite':entity.id}) }}" class="btn btn-default btn-sm">
+              <i class="fa fa-plus-circle"></i> Nouveau </a>
+            </div>
+          </div>
+          <div class="portlet-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                     Host
+                   </th>
+                   <th>
+                     Login
+                   </th>
+                   <th>
+                     Password
+                   </th>
+                   <th>
+                     Actions
+                   </th>
+                 </tr>
+               </thead>
+               <tbody>
+                 {% for ftp in ftpAccounts %}
+                 <tr>
+                  <td>
+                    <a href="{{ path('ftpaccounts_show', { 'id': ftp.id }) }}">
+                      {{ ftp.host }} </a>
+                    </td>
+                    <td>
+                      {{ ftp.login }}
+                    </td>
+                    <td>
+                     {{ ftp.passwd }}
+                   </td>
+                   <td>
+                    <a href="{{ path('ftpaccounts_edit', { 'id': ftp.id }) }}" class="btn default btn-xs purple"><i class="fa fa-edit"></i> Edit </a>
+                    <a href="{{ path('ftpaccounts_delete', { 'id': ftp.id }) }}" class="btn default btn-xs black"><i class="fa fa-trash-o"></i> Delete </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-pane" id="tab_3">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="portlet grey-cascade box">
+        <div class="portlet-title">
+          <div class="caption">
+            <i class="fa fa-database"></i>Base de données
+          </div>
+          <div class="actions">
+          <a href="{{ path('databases_new', {idWebsite:entity.id}) }}" class="btn btn-default btn-sm">
+              <i class="fa fa-plus-circle"></i> Nouveau </a>
+            </div>
+          </div>
+          <div class="portlet-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                     Host
+                   </th>
+                   <th>
+                     Base de donnée
+                   </th>
+                   <th>
+                     Login
+                   </th>
+                   <th>
+                     Password
+                   </th>
+                   <th>
+                     Actions
+                   </th>
+                 </tr>
+               </thead>
+               <tbody>
+                 {% for db in dbs %}
+                 <tr>
+                  <td>
+                    <a href="{{ path('databases_show', { 'id': db.id }) }}">
+                      {{ db.host }} </a>
+                    </td>
+                    <td>
+                      {{ db.db }}
+                    </td>
+                    <td>
+                      {{ db.login }}
+                    </td>
+                    <td>
+                     {{ db.passwd }}
+                   </td>
+                   <td>
+                    <a href="{{ path('databases_edit', { 'id': db.id }) }}" class="btn default btn-xs purple"><i class="fa fa-edit"></i> Edit </a>
+                    <a href="{{ path('databases_delete', { 'id': db.id }) }}" class="btn default btn-xs black"><i class="fa fa-trash-o"></i> Delete </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-pane" id="tab_4">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="portlet grey-cascade box">
+        <div class="portlet-title">
+          <div class="caption">
+            <i class="fa fa-envelope"></i>Comptes Email {% if (entity.webmail) %}({{ entity.webmail }}){% endif %}
+          </div>
+          <div class="actions">
+            <a href="{{ path('emailacc_new', {idWebsite:entity.id}) }}" class="btn btn-default btn-sm">
+              <i class="fa fa-plus-circle"></i> Nouveau </a>
+            </div>
+          </div>
+          <div class="portlet-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                     Email
+                   </th>
+                   <th>
+                     Mot de passe
+                   </th>
+                   <th>
+                     Actions
+                   </th>
+                 </tr>
+               </thead>
+               <tbody>
+                 {% for email in emails %}
+                 <tr>
+                  <td>
+                    <a href="{{ path('emailacc_show', { 'id': email.id }) }}">
+                      {{ email.email }} </a>
+                    </td>
+                    <td>
+                      {{ email.password }}
+                    </td>
+                    <td>
+                      <a href="{{ path('emailacc_edit', { 'id': email.id }) }}" class="btn default btn-xs purple"><i class="fa fa-edit"></i> Edit </a>
+                      <a href="{{ path('emailacc_delete', { 'id': email.id }) }}" class="btn default btn-xs black"><i class="fa fa-trash-o"></i> Delete </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane" id="tab_5">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="portlet grey-cascade box">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-wordpress"></i>Application CMS
+            </div>
+            <div class="actions">
+              <a href="{{ path('cms_new', {idWebsite:entity.id}) }}" class="btn btn-default btn-sm">
+                <i class="fa fa-plus-circle"></i> Nouveau </a>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                       backoffice
+                     </th>
+                     <th>
+                       Type
+                     </th>
+                     <th>
+                       Login
+                     </th>
+                     <th>
+                       Mot de passe
+                     </th>
+                     <th>
+                       contact
+                     </th>
+                     <th>
+                       Actions
+                     </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   {% for cms in cmsList %}
+                   <tr>
+                    <td>
+                    {% if 'http' in cms.adminUrl %}
+                      <a href="{{ cms.adminUrl }}" target="_blank">{{ cms.adminUrl }} </a>
+                      {% else %}
+                      {{ cms.adminUrl }}
+                      {% endif %}
+                      </td>
+                      <td>
+                        {{ cms.type }}
+                      </td>
+                      <td>
+                        {{ cms.login }}
+                      </td>
+                      <td>
+                        {{ cms.password }}
+                      </td>
+                      <td>
+                        {{ cms.contact }}
+                      </td>
+                      <td>
+                        <a href="{{ path('cms_edit', { 'id': cms.id }) }}" class="btn default btn-xs purple"><i class="fa fa-edit"></i> Edit </a>
+                        <a href="{{ path('cms_delete', { 'id': cms.id }) }}" class="btn default btn-xs black"><i class="fa fa-trash-o"></i> Delete </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab_6">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="portlet grey-cascade box">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-share-alt"></i>Comptes sociaux
+              </div>
+              <div class="actions">
+                <a href="{{ path('socialacc_new', {'idWebsite':entity.id}) }}" class="btn btn-default btn-sm">
+                  <i class="fa fa-plus-circle"></i> Nouveau </a>
+                </div>
+              </div>
+              <div class="portlet-body">
+                <div class="table-responsive">
+                  <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>
+                         Page
+                       </th>
+                       <th>
+                         Login
+                       </th>
+                       <th>
+                         Mot de passe
+                       </th>
+                       <th>
+                         Actions
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     {% for social in socialAcc %}
+                     <tr>
+                      <td>
+                      {% if 'http' in social.link %}
+                        <a href="{{ social.link }}" target="_blank">{{ social.link }}</a>
+                        {% else %}
+                        {{ social.link }}
+                        {% endif %}
+                        </td>
+                        <td>
+                          {{ social.login }}
+                        </td>
+                        <td>
+                          {{ social.passwd }}
+                        </td>
+                        <td>
+                          <a href="{{ path('socialacc_edit', { 'id': social.id }) }}" class="btn default btn-xs purple"><i class="fa fa-edit"></i> Edit </a>
+                          <a href="{{ path('socialacc_delete', { 'id': social.id }) }}" class="btn default btn-xs black"><i class="fa fa-trash-o"></i> Delete </a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+<!-- End: life time stats -->
+</div>
+</div>
+{% endblock %}

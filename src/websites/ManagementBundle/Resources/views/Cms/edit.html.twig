@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="portlet light bordered">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-globe font-red-sunglo"></i> <span class="caption-subject font-red-sunglo bold uppercase">Modifier cms</span>
+		</div>
+	</div>
+
+	<div class="portlet-body form">
+		{{ form_start(edit_form, {'role':'form', attr:{'class':'form-horizontal'}, 'method': 'POST'}) }}
+		<div class="form-body">
+
+			{% include 'websitesManagementBundle:Cms:form.html.twig' with {form:edit_form, websitesList:websitesList} %}
+
+			<div class="form-actions">
+				{{ form_widget(edit_form.submit, { attr:{'class': 'btn blue'} }) }}
+				<a href="{{ path('website_show',{id:entity.idWebsite}) }}" class="btn default">Annuler</a>
+			</div>
+
+		</div>
+		{{ form_widget(edit_form._token) }}
+		{{ form_end(edit_form, {'render_rest': false}) }}
+	</div>
+</div>
+
+{% endblock %}

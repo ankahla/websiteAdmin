@@ -1,0 +1,119 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+<div class="row search-form-default">
+									<div class="col-md-12">
+										<form action="{{path('websites_management_search')}}" method="POST">
+											<div class="input-group">
+												<div class="input-cont">
+													<input type="text" name="search"  value="{{ search }}" placeholder="Recherche..." class="form-control"/>
+												</div>
+												<span class="input-group-btn">
+												<button type="submit" class="btn green-haze">
+												Rechercher &nbsp; <i class="m-icon-swapright m-icon-white"></i>
+												</button>
+												</span>
+											</div>
+										</form>
+									</div>
+								</div>
+
+<div class="row">
+				<div class="col-md-12">
+					<div class="tabbable-line tabbable-full-width">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a data-toggle="tab" href="#tab_1_2">
+								Sites web <span class="badge badge-default"> {{ websites|length }} </span></a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#tab_1_3">Comptes FTP <span class="badge badge-default"> {{ ftpAccounts|length }} </span></a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#tab_1_4">
+								Bases de donnée <span class="badge badge-default"> {{ dbs|length }} </span></a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#tab_1_5">
+								Comptes Email <span class="badge badge-default"> {{ emailAcc|length }} </span></a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#tab_1_6">
+								Cms <span class="badge badge-default"> {{ cms|length }} </span></a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#tab_1_7">
+								Comptes sociaux <span class="badge badge-default"> {{ socialAcc|length }} </span></a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<!--end tab-pane-->
+							<div id="tab_1_2" class="tab-pane active">
+								{% for w in websites %}
+								<div class="search-classic well">
+									<h4>
+									<a href="{{ path('website_show', {id:w.id}) }}">{{ w.domain|raw }} </a>
+									</h4>
+									{% if w.cpanel and 'http' in w.cpanel %}
+									<a href="{{ w.cpanel|raw }}">{{ w.cpanel|raw }}</a>
+									{% endif %}
+								</div>
+								{% endfor %}
+							</div>
+							<div id="tab_1_3" class="tab-pane">
+							{% for f in ftpAccounts %}
+								<div class="search-classic well">
+									<h4>
+									<a href="{{ path('ftpaccounts_show', {id:f.id}) }}">{{ f.label|raw }} </a>
+									</h4>
+								</div>
+								{% endfor %}
+							</div>
+							<!--end tab-pane-->
+							<div id="tab_1_4" class="tab-pane">
+							{% for db in dbs %}
+								<div class="search-classic well">
+									<h4>
+									<a href="{{ path('databases_show', {id:db.id}) }}">{{ db.label|raw }} </a>
+									</h4>
+								</div>
+								{% endfor %}
+							</div>
+							<!--end tab-pane-->
+							<div id="tab_1_5" class="tab-pane">
+							{% for email in emailAcc %}
+								<div class="search-classic well">
+									<h4>
+									<a href="{{ path('emailacc_show', {id:email.id}) }}">{{ email.email|raw }} </a>
+									</h4>
+								</div>
+								{% endfor %}
+							</div>
+							<!--end tab-pane-->
+							<div id="tab_1_6" class="tab-pane">
+							{% for c in cms %}
+								<div class="search-classic well">
+									<h4>
+									<a href="{{ path('cms_show', {id:c.id}) }}">{{ c.adminUrl|raw }} </a>
+									</h4>
+								</div>
+								{% endfor %}
+							</div>
+
+							<div id="tab_1_7" class="tab-pane">
+							{% for s in socialAcc %}
+								<div class="search-classic well">
+									<h4>
+									<a href="{{ path('socialacc_show', {id:s.id}) }}">{{ s.link|raw }} </a>
+									</h4>
+								</div>
+								{% endfor %}
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!--end tabbable-->
+			</div>
+{% endblock %}
