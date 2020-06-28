@@ -1,12 +1,17 @@
 <?php
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\ErrorHandler\DebugClassLoader;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Dotenv\Dotenv;
 
 require __DIR__.'/../app/autoload.php';
 
+(new Dotenv())->load(
+    __DIR__.'/../.env',
+    __DIR__.'/../.env.dev',
+    __DIR__.'/../.env.test'
+);
+
 if (getenv('APP_DEBUG') === 'true') {
-    //Debug::enable();
     DebugClassLoader::enable();
 }
 $kernel = new AppKernel(getenv('APP_ENV'), getenv('APP_DEBUG'));

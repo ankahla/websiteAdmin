@@ -1,15 +1,16 @@
 imports:
-    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
 
 framework:
     #esi:             ~
     translator:      { fallbacks: ["fr"] }
-    secret:          "%secret%"
+    secret:          "870343531da40983da20247872363e2d9827d6d9"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
@@ -28,7 +29,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets:
-        base_path: '/web'
+        base_path: '%env(ASSETS_BASE_PATH)%'
 
 # Twig Configuration
 twig:
@@ -39,11 +40,7 @@ twig:
 doctrine:
     dbal:
         driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
+        url: '%env(DATABASE_URL)%'
         charset:  UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
@@ -59,10 +56,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: "smtp"
+    host:      "127.0.0.1"
+    username:  ~
+    password:  ~
     spool:     { type: memory }
 # fosUser
 fos_user:

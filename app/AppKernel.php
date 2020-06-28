@@ -2,7 +2,6 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\Dotenv\Dotenv;
 
 class AppKernel extends Kernel
 {
@@ -34,13 +33,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $projectDir = $this->getProjectDir();
-        $loader->load($projectDir.'/app/config/config_'.$this->getEnvironment().'.yml');
-        $dotenv = new Dotenv();
-        $dotenv->load(
-            $projectDir.'/.env',
-            $projectDir.'/.env.dev',
-            $projectDir.'/.env.test'
-        );
+        $loader->load($this->getProjectDir().'/app/config/config_'.$this->getEnvironment().'.yml');
     }
 }
