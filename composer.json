@@ -19,7 +19,8 @@
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/monolog-bundle": "^3.4",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/symfony": "^4.4"
+        "symfony/symfony": "^4.4",
+        "doctrine/doctrine-migrations-bundle": "^3.0"
     },
     "require-dev": {
         "symfony/profiler-pack": "^1.0"
@@ -27,6 +28,7 @@
     "scripts": {
         "symfony-scripts": [
             "app/console doctrine:schema:update --force",
+            "app/console -n doctrine:migrations:migrate",
             "app/console assets:install web"
         ],
         "post-install-cmd": [

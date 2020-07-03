@@ -54,6 +54,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+doctrine_migrations:
+    migrations_paths:
+        'App\Migrations': '%kernel.project_dir%/migrations'
+    storage:
+        # Default (SQL table) metadata storage configuration
+        table_storage:
+            table_name: 'doctrine_migration_versions'
+            version_column_name: 'version'
+            version_column_length: 190
+            executed_at_column_name: 'executed_at'
+            execution_time_column_name: 'execution_time'
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "smtp"

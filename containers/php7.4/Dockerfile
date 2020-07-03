@@ -1,5 +1,5 @@
 FROM php:7.4-fpm as base
-MAINTAINER Maher LANDOLSI & ANOUAR KAHLA 
+MAINTAINER ANOUAR KAHLA
 
 # Install PHP extensions and PECL modules.
 RUN apt-get update && deps=" \
